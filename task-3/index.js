@@ -5,7 +5,8 @@ class Emitter {
    * @memberof Emitter
    */
   constructor() {
-    // Ваш код
+    //Объект в котором будем хранить события и обработчики
+    this.events = {};
   }
 
   /**
@@ -16,7 +17,10 @@ class Emitter {
    * @memberof Emitter
    */
   on(event, handler) {
-    // Ваш код
+    //Создаем событие, если еще не создано и добавляем обработчик 
+    if (!this.events[event]) 
+      this.events[event] = {handlers: []};
+    this.events[event].handlers.push(handler);
   }
 
   /**
@@ -28,7 +32,11 @@ class Emitter {
    * @memberof Emitter
    */
   emit(event, data) {
-    // Ваш код
+    //Если нет события или нет обработчиков, ничего не делаем
+    if (!this.events[event] || !this.events[event].handlers.length )
+      return false;
+    //Вызывем каждый обработчик
+    this.events[event].handlers.forEach(item => item(data));
   }
 }
 

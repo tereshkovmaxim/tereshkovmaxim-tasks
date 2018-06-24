@@ -8,7 +8,9 @@
  * @returns {Boolean}
  */
 function haveSameItems(arr1, arr2) {
-  return true;
+  let temp = arr2.map( item => item );
+  if (arr1.length != temp.length) return false;
+  return (temp.sort((a, b) => a - b).every((item, i) => item == arr1[i])); 
 }
 
 export default haveSameItems;
